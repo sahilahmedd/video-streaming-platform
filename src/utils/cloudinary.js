@@ -5,9 +5,9 @@ import fs from "fs";
 
 // Cloudinay config
 cloudinary.config({
-  cloud_name: process.env.CLOUDINAY_CLOUD_NAME,
-  api_key: process.env.CLOUDINAY_API_KEY,
-  api_secret: process.env.CLOUDINAY_API_SECRET, // Click 'View API Keys' above to copy your API secret
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET, // Click 'View API Keys' above to copy your API secret
 });
 
 
@@ -22,7 +22,8 @@ const uploadOnCoudinary = async (localFilePath) => {
             })
             // File has been uploaded successfully
             
-            console.log("File is uploaded on cloudinary", res.url);
+            // console.log("File is uploaded on cloudinary", res.url);
+            fs.unlinkSync(localFilePath)
             return res;
             
         } catch (error) {
