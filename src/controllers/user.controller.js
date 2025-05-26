@@ -215,7 +215,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   
     const options = {
       httpOnyl: true,
-      secure: true;
+      secure: true,
     }
   
     const { accessToken, newRefreshToken } = await generateAccessAndRefereshTokens(user._id)
