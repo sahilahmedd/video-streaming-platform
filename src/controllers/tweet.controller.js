@@ -41,7 +41,7 @@ const getUserTweets = asyncHandler(async (req, res) => {
     throw new ApiError("User dosen't exist");
   }
 
-  const tweets = await Tweet.findById({ owner: req.user._id }).populate(
+  const tweets = await Tweet.find({ owner: req.user._id }).populate(
     "owner",
     "fullname"
   );
@@ -54,11 +54,23 @@ const getUserTweets = asyncHandler(async (req, res) => {
 const getAnyUserTweets = asyncHandler(async (req, res) =>{
   const { userID } = req.params;
 
-  const userExist = await User.find({_id: userID});
+  if(!isValidObjectId(userID)){
+    throw new ApiError(400, "Invalid User ID")
+  }
+
+  const userExist = await User.findById(userID);
 
   if(!userExist) {
     throw new ApiError(404, "User not found")
   }
+
+  const tweet = await Tweet.find({owner: userID}).populate("owner", "fullname")
+
+  return res
+  .status(200)
+  .json(
+    new ApiResponse(200, "Tweets fetched successfully")
+  )
 
 })
 
@@ -95,7 +107,7 @@ const deleteTweet = asyncHandler(async (req, res) => {
 
   const { tweetId } = req.params;
 
-  if(!mongoose.Types.ObjectId(tweetId)){
+  if(!isValidObjectId(tweetId)){
     throw new ApiError(400, "Invalid Tweet ID")
   }
 
