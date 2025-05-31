@@ -240,6 +240,22 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 const changeCurrentPassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
 
+  if(!oldPassword && !newPassword) {
+    throw new ApiError(400, "Fileds can't be empty")
+  }
+
+  if(!oldPassword.trim()) {
+    throw new ApiError(400, "Old Password is required")
+  }
+
+  if(!newPassword.trim()) {
+    throw new ApiError(400, "New password is required")
+  }
+
+  if(oldPassword.trim() === newPassword.trim()) {
+    throw new ApiError(400, "Old and New password can't be same")
+  }
+
   const user = await User.findById(req.user?._id);
   const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
 

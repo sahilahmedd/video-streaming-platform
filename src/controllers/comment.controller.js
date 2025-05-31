@@ -38,6 +38,7 @@ const addComment = asyncHandler(async (req, res) => {
   const { content } = req.body;
   const { videoId } = req.params;
 
+  
   if (!content) {
     throw new ApiError(400, "Comment can't be empty");
   }

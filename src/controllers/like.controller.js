@@ -115,7 +115,7 @@ const getLikedVideos = asyncHandler(async (req, res) => {
   const { userID } = req.params;
 
   if (!userID || !isValidObjectId(userID)) {
-    throw new ApiError(400, "User ID is Invalid");
+    throw new ApiError(400, "User ID is required");
   }
 
   const likes = await Like.find({
