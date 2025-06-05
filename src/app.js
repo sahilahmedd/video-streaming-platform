@@ -26,6 +26,7 @@ import tweetRouter from "./routes/tweet.routes.js";
 import commentRouter from "./routes/comment.routes.js";
 import likeRouter from "./routes/likes.routes.js";
 import playlistRouter from "./routes/playlist.routes.js";
+import subscriptionRouter from "./routes/subscription.routes.js"
 
 // routes Declaration
 // We don't directly use the app.get or app.post here because it is not the best practice insteade we use app.use() and define a standard route and then define the specifice routes in a saperate file
@@ -34,6 +35,7 @@ app.use("/api/v1/users", tweetRouter);
 app.use("/api/v1/users", commentRouter);
 app.use("/api/v1/users", likeRouter);
 app.use("/api/v1/users", playlistRouter);
+app.use("/api/v1/users", subscriptionRouter);
 
 // http://localhost:3000/user/api/v1/register => register route
 
