@@ -311,7 +311,7 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
   const avatar = await uploadOnCoudinary(avatarLocalPath);
 
   if (!avatar.url) {
-    throw new ApiError(400, "Error while uploding on avatar");
+    throw new ApiError(400, "Error while uploding avatar");
   }
 
   const user = await User.findByIdAndUpdate(
