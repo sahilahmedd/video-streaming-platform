@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { verifyJWT } from "../middlewares/auth.middleware";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 import {
   addVideoToPlaylist,
   createPlaylist,
@@ -8,35 +8,29 @@ import {
   getUserPlaylists,
   removeVideoFromPlaylist,
   updatePlaylist,
-} from "../controllers/playlist.controller";
+} from "../controllers/playlist.controller.js";
 
 const router = Router();
 
-// Routes
+// ✅ Create Playlist
+router.post("/playlist", verifyJWT, createPlaylist);
 
-// Create Playlist
-app.use("/playlist").post(verifyJWT, createPlaylist);
+// ✅ Get all playlists for a user
+router.get("/playlist/user/:userId", getUserPlaylists);
 
-// Get user Playlist
-app.use("/playlist/:userId").get(getUserPlaylists);
+// ✅ Get playlist by ID
+router.get("/playlist/:playlistId", getPlaylistById);
 
-// Get Playlist by ID
-app.use("/playlist/:playlistId").get(getPlaylistById);
+// ✅ Update Playlist
+router.put("/playlist/:playlistId", verifyJWT, updatePlaylist);
 
-// Update
-app.use("/playlist/:playlistId").put(verifyJWT, updatePlaylist);
+// ✅ Delete Playlist
+router.delete("/playlist/:playlistId", verifyJWT, deletePlaylist);
 
-// Delete
-app.use("/playlist/:playlistId").delete(verifyJWT, deletePlaylist);
+// ✅ Add video to playlist
+router.put("/playlist/:playlistId/video/:videoId", verifyJWT, addVideoToPlaylist);
 
-// Add video to playlist
-app.use("/playlist/:playlistId/:videoId").put(verifyJWT, addVideoToPlaylist);
-
-// remove video
-app.delete(
-  "/playlist/:playlistId/:videoId",
-  verifyJWT,
-  removeVideoFromPlaylist
-);
+// ✅ Remove video from playlist
+router.delete("/playlist/:playlistId/video/:videoId", verifyJWT, removeVideoFromPlaylist);
 
 export default router;
