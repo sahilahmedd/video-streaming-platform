@@ -262,6 +262,49 @@ The server will start on `http://localhost:8000` (or the port specified in your 
 - ESLint for code linting
 - Consistent code structure and naming conventions
 
+## 🚀 Deployment
+
+### Vercel Deployment
+
+This project is configured for Vercel deployment with serverless functions.
+
+1. **Install Vercel CLI**
+
+   ```bash
+   npm i -g vercel
+   ```
+
+2. **Deploy to Vercel**
+
+   ```bash
+   vercel
+   ```
+
+3. **Set Environment Variables**
+   In your Vercel dashboard, add all the required environment variables:
+
+   - `MONGODB_URI`
+   - `ACCESS_TOKEN_SECRET`
+   - `REFRESH_TOKEN_SECRET`
+   - `ACCESS_TOKEN_EXPIRY`
+   - `REFRESH_TOKEN_EXPIRY`
+   - `CLOUDINARY_CLOUD_NAME`
+   - `CLOUDINARY_API_KEY`
+   - `CLOUDINARY_API_SECRET`
+   - `CORS_ORIGIN`
+
+4. **Redeploy**
+   ```bash
+   vercel --prod
+   ```
+
+### Important Notes for Vercel
+
+- The app uses serverless functions, so avoid long-running processes
+- File uploads are handled via Cloudinary (not local storage)
+- Database connections are managed per request
+- CORS origin should be set to your frontend domain
+
 ## 📝 Environment Variables
 
 Make sure to set up the following environment variables:

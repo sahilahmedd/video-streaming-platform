@@ -12,20 +12,23 @@ dotenv.config({
     path: './env'
 })
 
-connectDB()
-.then(()=>{
-    app.listen(process.env.PORT || 8000, ()=>{
-        console.log(`App is listening on port: ${process.env.PORT}`);        
-    });
-    app.on("error", (error)=>{
-        console.log("Error: ", error);
-        throw error
-    })
-})
-.catch((err)=>{
-    console.log("MONGO db connection error: ", err);
-    
-})
+// Only start server if not in Vercel environment
+if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
+    connectDB()
+        .then(() => {
+            app.listen(process.env.PORT || 8000, () => {
+                console.log(`App is listening on port: ${process.env.PORT}`);
+            });
+            app.on("error", (error) => {
+                console.log("Error: ", error);
+                throw error
+            })
+        })
+        .catch((err) => {
+            console.log("MONGO db connection error: ", err);
+
+        })
+}
 
 
 /*
