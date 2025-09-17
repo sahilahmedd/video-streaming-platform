@@ -150,6 +150,10 @@ src/
 
 The server will start on `http://localhost:8000` (or the port specified in your environment variables).
 
+## 🚀 Quick Start with Postman
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/9b32070d-279e-45f6-aa75-2384d6b18474)
+
 ## 📚 API Endpoints
 
 ### Authentication Routes (`/api/v1/users`)
